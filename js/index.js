@@ -113,25 +113,23 @@ console.log("Total: $" + calculateSum(finances));
 
 //Average of changes in Profit/Losses over the entire period - not matching, to be checked
 
-const earningsArray = finances.map((el) => el[1]);
+let earningsArray = finances.map((el) => el[1]);
 
-const average = (earningsArray = []) => {
-    const sum = earningsArray.reduce((a, b) => a + b);
-    return sum / earningsArray.length;
+let average = (earningsArray = []) => {
+    let sum = earningsArray.reduce((a, b) => a + b);
+    return sum / finances.length;
 }
 
-console.log("Total average : " + average(earningsArray));
+console.log("Total average: " + average(earningsArray));
 
 //Greatest increase/decrease in profit(date and amount) over the entire period
 
-console.log(Math.max(...average(earningsArray)));
-
-const maxMonth = {
+let maxMonth = {
     monthName: '',
     profit: 0,
 };
 
-const minMonth = {
+let minMonth = {
     monthName: '',
     profit: 0,
 };
