@@ -86,15 +86,16 @@ let finances = [
     ['Jan-2017', 138230],
     ['Feb-2017', 671099]
 ];
-
+//Title
 console.log("Financial Analysis");
 
+//Total number of months
 let length = finances.length;
 
 console.log("Total Months: " + length);
 
 
-
+//Net ammount Profit/Losses - needs checking as the total is not right
 let calculateSum = (finances) => {
     let count = 0;
     for (let i = 1; i < finances.length; i++) {
@@ -108,4 +109,16 @@ let calculateSum = (finances) => {
 };
 console.log("Total: $" + calculateSum(finances));
 
+//Average of changes in Profit/Losses over the entire period
+const earningsArray = finances.map((el) => el[1]);
+
+const profitMonths = finances.filter((el) => el[1] > 0);
+const salesOnProfitMonths = profitMonths
+    .map((el) => el[1])
+    .reduce((accVal, curVal) => accVal + curVal, 0);
+
+const avgOfProfitAndLoss =
+    earningsArray.reduce((accVal, curVal) => accVal + curVal, 0) / finances.length;
+
+console.log('Total average : ', avgOfProfitAndLoss);
 
