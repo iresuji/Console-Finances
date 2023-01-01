@@ -1,4 +1,4 @@
-var finances = [
+let finances = [
     ['Jan-2010', 867884],
     ['Feb-2010', 984655],
     ['Mar-2010', 322013],
@@ -88,3 +88,7 @@ var finances = [
 ];
 
 console.log("Financial Analysis");
+
+let length = finances.length;
+
+console.log("Total Months: " + length);
