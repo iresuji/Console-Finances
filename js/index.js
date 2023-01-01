@@ -92,3 +92,20 @@ console.log("Financial Analysis");
 let length = finances.length;
 
 console.log("Total Months: " + length);
+
+
+
+let calculateSum = (finances) => {
+    let count = 0;
+    for (let i = 1; i < finances.length; i++) {
+        if (Array.isArray(finances[i])) {
+            count += calculateSum(finances[i]);
+            continue;
+        };
+        count += finances[i];
+    };
+    return count;
+};
+console.log("Total: $" + calculateSum(finances));
+
+
