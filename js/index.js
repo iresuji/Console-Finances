@@ -96,6 +96,8 @@ console.log("Total Months: " + length);
 
 
 //Net ammount Profit/Losses - needs checking as the total is not right
+
+
 let calculateSum = (finances) => {
     let count = 0;
     for (let i = 1; i < finances.length; i++) {
@@ -109,16 +111,45 @@ let calculateSum = (finances) => {
 };
 console.log("Total: $" + calculateSum(finances));
 
-//Average of changes in Profit/Losses over the entire period
+//Average of changes in Profit/Losses over the entire period - not matching, to be checked
+
 const earningsArray = finances.map((el) => el[1]);
 
-const profitMonths = finances.filter((el) => el[1] > 0);
-const salesOnProfitMonths = profitMonths
-    .map((el) => el[1])
-    .reduce((accVal, curVal) => accVal + curVal, 0);
+const average = (earningsArray = []) => {
+    const sum = earningsArray.reduce((a, b) => a + b);
+    return sum / earningsArray.length;
+}
 
-const avgOfProfitAndLoss =
-    earningsArray.reduce((accVal, curVal) => accVal + curVal, 0) / finances.length;
+console.log("Total average : " + average(earningsArray));
 
-console.log('Total average : ', avgOfProfitAndLoss);
+//Greatest increase/decrease in profit(date and amount) over the entire period
 
+console.log(Math.max(...average(earningsArray)));
+
+const maxMonth = {
+    monthName: '',
+    profit: 0,
+};
+
+const minMonth = {
+    monthName: '',
+    profit: 0,
+};
+
+finances.forEach((month) => {
+    if (month[1] > maxMonth.profit) {
+        maxMonth.monthName = month[0];
+        maxMonth.profit = month[1];
+    }
+
+    if (month[1] < minMonth.profit) {
+        minMonth.monthName = month[0];
+        minMonth.profit = month[1];
+    }
+
+    return { maxMonth, minMonth };
+});
+
+
+console.log("Greatest Increase in Profits: ", maxMonth);
+console.log("Greatest Decrease in Profits: ", minMonth);
