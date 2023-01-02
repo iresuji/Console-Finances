@@ -100,14 +100,13 @@ console.log("Total Months: " + length);
 
 let calculateSum = (finances) => {
     let count = 0;
-    for (let i = 1; i < finances.length; i++) {
+    for (let i = 0; i < finances.length; i++) {
         if (Array.isArray(finances[i])) {
-            count += calculateSum(finances[i]);
-            continue;
+            count += finances[i][1];
         };
-        count += finances[i];
     };
     return count;
+
 };
 console.log("Total: $" + calculateSum(finances));
 
@@ -120,34 +119,23 @@ let average = (earningsArray = []) => {
     return sum / finances.length;
 }
 
-console.log("Total average: " + average(earningsArray));
+console.log("Total average: $" + average(earningsArray).toFixed(0) + ".00");
+
+let calculateAverage = () => {
+    let changes = 0;
+    for (let i = 0; i < finances.length; i++) {
+        if (Array.isArray(finances[i]) && finances[i + 1]) {
+            //console.log(finances[i + 1][1] - finances[i][1]);
+            changes += finances[i + 1][1] - finances[i][1];
+        };
+    };
+    return changes / finances.length;
+
+};
+
+console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8));
 
 //Greatest increase/decrease in profit(date and amount) over the entire period
 
-let maxMonth = {
-    monthName: '',
-    profit: 0,
-};
 
-let minMonth = {
-    monthName: '',
-    profit: 0,
-};
-
-finances.forEach((month) => {
-    if (month[1] > maxMonth.profit) {
-        maxMonth.monthName = month[0];
-        maxMonth.profit = month[1];
-    }
-
-    if (month[1] < minMonth.profit) {
-        minMonth.monthName = month[0];
-        minMonth.profit = month[1];
-    }
-
-    return { maxMonth, minMonth };
-});
-
-
-console.log("Greatest Increase in Profits: ", maxMonth);
-console.log("Greatest Decrease in Profits: ", minMonth);
+console.log(Math.max(...calculateAverage()));
