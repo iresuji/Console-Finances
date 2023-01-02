@@ -135,7 +135,32 @@ let calculateAverage = () => {
 
 console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8));
 
-//Greatest increase/decrease in profit(date and amount) over the entire period
+//Greatest increase in profit(date and amount) over the entire period
 
+let calculateMax = () => {
+    let changes = 0;
+    for (let i = 0; i < finances.length; i++) {
+        if (Array.isArray(finances[i]) && finances[i + 1]) {
+            changes += finances[i + 1][1] - finances[i][1];
+        };
+    };
+    return Math.max(changes);
 
-console.log(Math.max(...calculateAverage()));
+};
+
+console.log("Greatest Increase in Profits: " + calculateMax().toFixed(2).slice(1, 8));
+
+//Greatest decrease in profit(date and amount) over the entire period
+
+let calculateMin = () => {
+    let changes = 0;
+    for (let i = 0; i < finances.length; i++) {
+        if (Array.isArray(finances[i]) && finances[i + 1]) {
+            changes += finances[i + 1][1] - finances[i][1];
+        };
+    };
+    return Math.min(changes);
+
+};
+
+console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(1, 8));
