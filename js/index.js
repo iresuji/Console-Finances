@@ -123,16 +123,16 @@ console.log("Total average: $" + average(earningsArray).toFixed(0) + ".00");*/
 let calculateAverage = () => {
     let changes = 0;
     for (let i = 0; i < finances.length; i++) {
-        if (Array.isArray(finances[i]) && finances[i + 1]) {
+        if (Array.isArray(finances[i]) && (finances[i + 1])) {
             //console.log(finances[i + 1][1] - finances[i][1]);
             changes += finances[i + 1][1] - finances[i][1];
         };
     };
-    return changes / finances.length;
+    return changes / (finances.length - 1);
 
 };
 
-console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8));
+console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8)); //number has been made positive with the slice property as this is an absolute number
 
 //Greatest increase in profit(date and amount) over the entire period
 
@@ -147,19 +147,19 @@ let calculateMax = () => {
 
 };
 
-console.log("Greatest Increase in Profits: " + calculateMax().toFixed(2).slice(1, 8));
+console.log("Greatest Increase in Profits: " + calculateMax().toFixed(2).slice(1, 10));
 
 //Greatest decrease in profit(date and amount) over the entire period
 
 let calculateMin = () => {
-    let min = 0;
+    let changes = 0;
     for (let i = 0; i < finances.length; i++) {
         if (Array.isArray(finances[i]) && finances[i + 1]) {
-            min += finances[i + 1][1] - finances[i][1];
+            changes += finances[i + 1][1] - finances[i][1];
         };
     };
-    return Math.min(min);
+    return Math.min(changes);
 
 };
 
-console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(1, 8));
+console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(1, 10));
