@@ -156,14 +156,16 @@ console.log("Greatest Increase in Profits: " + "$" + calculateMax());
 let calculateMin = () => {
     let minProfit = 0;
     for (let i = 1; i < finances.length; i++) {
-        let profitDay = finances[i][1]
-        let previousDay = finances[i - 1][1]
-        let profit = profitDay - previousDay
+        let profitAmount = finances[i][1]
+
+        let previousAmount = finances[i - 1][1]
+        let profit = profitAmount - previousAmount
         if (profit < minProfit) {
             minProfit = profit
         }
     }
     return minProfit;
 };
+
 
 console.log("Greatest Decrease in Profits: " + "$" + calculateMin());
