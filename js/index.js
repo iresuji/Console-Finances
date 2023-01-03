@@ -148,20 +148,22 @@ let calculateMax = () => {
     }
     return maxProfit;
 };
-console.log("Greatest Increase in Profits: " + calculateMax());
+console.log("Greatest Increase in Profits: " + "$" + calculateMax());
 
 
 //Greatest decrease in profit(date and amount) over the entire period
 
 let calculateMin = () => {
-    let changes = 0;
-    for (let i = 0; i < finances.length; i++) {
-        if (Array.isArray(finances[i]) && finances[i + 1]) {
-            changes += finances[i + 1][1] - finances[i][1];
-        };
-    };
-    return Math.min(changes);
-
+    let minProfit = 0;
+    for (let i = 1; i < finances.length; i++) {
+        let profitDay = finances[i][1]
+        let previousDay = finances[i - 1][1]
+        let profit = profitDay - previousDay
+        if (profit < minProfit) {
+            minProfit = profit
+        }
+    }
+    return minProfit;
 };
 
-console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(0, 10));
+console.log("Greatest Decrease in Profits: " + "$" + calculateMin());
