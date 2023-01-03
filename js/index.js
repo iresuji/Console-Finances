@@ -95,7 +95,7 @@ let length = finances.length;
 console.log("Total Months: " + length);
 
 
-//Net ammount Profit/Losses 
+//Net amount Profit/Losses 
 
 let calculateSum = (finances) => {
     let count = 0;
@@ -109,7 +109,7 @@ let calculateSum = (finances) => {
 };
 console.log("Total: $" + calculateSum(finances));
 
-//Average of changes in Profit/Losses over the entire period - not matching, to be checked
+//Average of Profit/Losses over the entire period - this is the average of the total(not the changes)
 
 /*let earningsArray = finances.map((el) => el[1]);
 
@@ -137,17 +137,19 @@ console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8)); /
 //Greatest increase in profit(date and amount) over the entire period
 
 let calculateMax = () => {
-    let changes = 0;
-    for (let i = 0; i < finances.length; i++) {
-        if (Array.isArray(finances[i]) && finances[i + 1]) {
-            changes += finances[i + 1][1] - finances[i][1];
-        };
-    };
-    return Math.max(changes);
-
+    let maxProfit = 0;
+    for (let i = 1; i < finances.length; i++) {
+        let profitMonth = finances[i][1]
+        let previousMonth = finances[i - 1][1]
+        let profit = profitMonth - previousMonth
+        if (profit > maxProfit) {
+            maxProfit = profit
+        }
+    }
+    return maxProfit;
 };
+console.log("Greatest Increase in Profits: " + calculateMax());
 
-console.log("Greatest Increase in Profits: " + calculateMax().toFixed(2).slice(1, 10));
 
 //Greatest decrease in profit(date and amount) over the entire period
 
@@ -162,4 +164,4 @@ let calculateMin = () => {
 
 };
 
-console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(1, 10));
+console.log("Greatest Decrease in Profits: " + calculateMin().toFixed(2).slice(0, 10));
