@@ -111,15 +111,6 @@ console.log("Total: $" + calculateSum(finances));
 
 //Average of Profit/Losses over the entire period - this is the average of the total(not the changes)
 
-/*let earningsArray = finances.map((el) => el[1]);
-
-let average = (earningsArray = []) => {
-    let sum = earningsArray.reduce((a, b) => a + b);
-    return sum / finances.length;
-}
-
-console.log("Total average: $" + average(earningsArray).toFixed(0) + ".00");*/
-
 let calculateAverage = () => {
     let changes = 0;
     for (let i = 0; i < finances.length; i++) {
@@ -132,40 +123,51 @@ let calculateAverage = () => {
 
 };
 
-console.log("Average  Change: $" + calculateAverage().toFixed(2).slice(1, 8)); //number has been made positive with the slice property as this is an absolute number
+console.log("Average  Change: $" + calculateAverage().toFixed(2)); //number has been reduced the decimal places
+
+
 
 //Greatest increase in profit(date and amount) over the entire period
 
 let calculateMax = () => {
     let maxProfit = 0;
+    let maxProfitMonth = "";
     for (let i = 1; i < finances.length; i++) {
         let profitMonth = finances[i][1]
         let previousMonth = finances[i - 1][1]
         let profit = profitMonth - previousMonth
         if (profit > maxProfit) {
             maxProfit = profit
+            maxProfitMonth = finances[i][0];
         }
     }
-    return maxProfit;
+    return [maxProfitMonth, maxProfit];
 };
-console.log("Greatest Increase in Profits: " + "$" + calculateMax());
+
+let maxMonthValue = calculateMax();
+
+console.log("Greatest Increase in Profits: " + maxMonthValue[0] + " $" + maxMonthValue[1]);
 
 
 //Greatest decrease in profit(date and amount) over the entire period
 
 let calculateMin = () => {
     let minProfit = 0;
+    let minProfitMonth = "";
     for (let i = 1; i < finances.length; i++) {
         let profitAmount = finances[i][1]
-
         let previousAmount = finances[i - 1][1]
         let profit = profitAmount - previousAmount
         if (profit < minProfit) {
             minProfit = profit
+            minProfitMonth = finances[i][0];
         }
     }
-    return minProfit;
+    return [minProfitMonth, minProfit]
+
 };
 
+let minMonthValue = calculateMin();
 
-console.log("Greatest Decrease in Profits: " + "$" + calculateMin());
+
+console.log("Greatest Decrease in Profits: " + minMonthValue[0] + " $" + minMonthValue[1]);
